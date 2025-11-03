@@ -1547,6 +1547,34 @@ model workflow_templates {
   @@index([tenantId, isActive])
 }
 
+model filter_presets {
+  id                String   @id
+  tenantId          String
+  name              String   @db.VarChar(255)
+  description       String?
+  entityType        String   @db.VarChar(50)
+  filterConfig      Json
+  filterLogic       String   @default("AND")
+  isPublic          Boolean  @default(false)
+  isDefault         Boolean  @default(false)
+  icon              String?  @db.VarChar(50)
+  color             String?  @db.VarChar(50)
+  usageCount        Int      @default(0)
+  lastUsedAt        DateTime?
+  createdBy         String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  Tenant            Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  creator           users    @relation("FilterPresetCreatedBy", fields: [createdBy], references: [id])
+
+  @@unique([tenantId, name])
+  @@index([tenantId, entityType])
+  @@index([tenantId, isPublic])
+  @@index([createdBy, createdAt])
+  @@index([isDefault])
+  @@map("filter_presets")
+}
+
 enum AvailabilityStatus {
   AVAILABLE
   BUSY
