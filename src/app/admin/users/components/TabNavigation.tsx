@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { isFeatureEnabled } from '@/lib/feature-flags'
 
 export type TabType = 'dashboard' | 'entities' | 'workflows' | 'bulk-operations' | 'audit' | 'rbac' | 'admin'
 
