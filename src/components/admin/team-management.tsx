@@ -88,6 +88,31 @@ function TeamMemberCard({ member, onEdit, onDelete, onToggleStatus, onViewDetail
   const s = member.stats || defaultStats
   const utilizationColor = s.utilizationRate >= 85 ? 'text-green-600' : s.utilizationRate >= 70 ? 'text-yellow-600' : 'text-red-600'
 
+  const [isCreateTaskOpen, setIsCreateTaskOpen] = useState(false)
+  const [taskTitle, setTaskTitle] = useState('')
+  const [taskDue, setTaskDue] = useState(new Date().toISOString().slice(0,10))
+  const [taskPriority, setTaskPriority] = useState('MEDIUM')
+
+  const openCreateTask = () => {
+    setTaskTitle(`Follow up: ${member.name}`)
+    setTaskDue(new Date().toISOString().slice(0,10))
+    setTaskPriority('MEDIUM')
+    setIsCreateTaskOpen(true)
+  }
+
+  const createTaskForMember = async () => {
+    if (!member.userId) { alert('This team member is not linked to a user account and cannot be assigned tasks. Edit member and set a User.'); return }
+    try {
+      const res = await fetch('/api/admin/tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: taskTitle, priority: (taskPriority || 'MEDIUM').toUpperCase(), status: 'OPEN', dueAt: taskDue ? new Date(taskDue).toISOString() : null, assigneeId: member.userId }) })
+      if (res.ok) {
+        alert('Task created and assigned')
+        setIsCreateTaskOpen(false)
+      } else {
+        alert('Failed to create task')
+      }
+    } catch (e) { alert('Failed to create task') }
+  }
+
   return (
     <div className="bg-card rounded-lg border border-border p-6 hover:shadow-md transition-all">
       <div className="flex items-start justify-between mb-4">
