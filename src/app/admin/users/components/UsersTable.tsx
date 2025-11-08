@@ -198,8 +198,8 @@ export const UsersTable = memo(function UsersTable({
   )
 
   return (
-    <Card>
-      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 space-y-0">
+    <Card className="flex flex-col h-full">
+      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 space-y-0 flex-shrink-0">
         <div className="space-y-1 min-w-0">
           <CardTitle className="text-xl sm:text-2xl">User Directory</CardTitle>
           <CardDescription className="text-xs sm:text-sm">Search, filter and manage users</CardDescription>
