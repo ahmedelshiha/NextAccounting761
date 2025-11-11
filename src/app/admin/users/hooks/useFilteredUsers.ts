@@ -2,7 +2,8 @@
 
 import { useCallback, useMemo } from 'react'
 import useSWR, { SWRConfiguration } from 'swr'
-import { UserItem } from '@/services/user.service'
+import React from 'react'
+import { UserItem } from '../contexts/UserDataContext'
 import {
   filterResultsCache,
   createFilterCacheKey,

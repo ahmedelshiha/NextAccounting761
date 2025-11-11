@@ -2,7 +2,8 @@
 
 import React, { useCallback, useMemo } from 'react'
 import { FixedSizeList as List } from 'react-window'
-import { UserItem } from '@/services/user.service'
+import type { ListOnScrollProps } from 'react-window'
+import { UserItem } from '../contexts/UserDataContext'
 
 export interface VirtualizedUsersListProps {
   users: UserItem[]
@@ -35,11 +36,8 @@ export const VirtualizedUsersList = React.memo(function VirtualizedUsersList({
 
   const ITEM_HEIGHT = 48 // Standard row height in pixels
 
-  const handleScroll = useCallback(({ scrollOffset, clientHeight }: {
-    scrollOffset: number
-    clientHeight: number
-  }) => {
-    onScroll?.(scrollOffset, clientHeight)
+  const handleScroll = useCallback((props: ListOnScrollProps) => {
+    onScroll?.(props.scrollOffset, props.scrollUpdateWasRequested ? 0 : props.scrollOffset)
   }, [onScroll])
 
   // Scroll to item by index
@@ -81,11 +79,11 @@ export const VirtualizedUsersList = React.memo(function VirtualizedUsersList({
       onScroll={handleScroll}
       className={className}
     >
-      {({ index, style }) => (
+      {(({ index, style }) => (
         <div key={users[index].id} style={style}>
           {renderItem(users[index], index, style)}
         </div>
-      )}
+      )) as React.ReactNode}
     </List>
   )
 })

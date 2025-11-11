@@ -8,8 +8,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Clock, Mail, Calendar, Settings, Trash2, Copy, Edit2, MoreHorizontal, Toggle2 } from 'lucide-react'
-import { useExportScheduler, ExportSchedule } from '../hooks/useExportScheduler'
+import { Clock, Mail, Calendar, Settings, Trash2, Copy, Edit2, MoreHorizontal, ToggleRight } from 'lucide-react'
+import { useExportScheduler } from '../hooks/useExportScheduler'
+import type { ExportSchedule } from '../utils/export-scheduler'
 import {
   calculateNextExecutionTime,
   formatFrequency,
