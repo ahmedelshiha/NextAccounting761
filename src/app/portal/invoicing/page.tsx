@@ -34,7 +34,7 @@ export default function InvoicingPage() {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            The Invoicing feature is coming soon. You'll be able to create, send, and manage invoices here.
+            The Invoicing feature is coming soon. You&apos;ll be able to create, send, and manage invoices here.
           </AlertDescription>
         </Alert>
 

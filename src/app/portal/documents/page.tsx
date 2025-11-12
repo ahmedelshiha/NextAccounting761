@@ -38,7 +38,7 @@ export default function DocumentsPage() {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            The Documents feature is coming soon. You'll be able to upload, organize, and manage all your tax documents here.
+            The Documents feature is coming soon. You&apos;ll be able to upload, organize, and manage all your tax documents here.
           </AlertDescription>
         </Alert>
 
