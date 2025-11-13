@@ -33,7 +33,7 @@ export const PATCH = withTenantContext(
 
       if (validated.setAsDefault) {
         await prisma.userPaymentMethod.updateMany({
-          where: { userId, tenantId, isDefault: true, id: { not: id } },
+          where: { userId: userId!, tenantId: tenantId!, isDefault: true, id: { not: id } },
           data: { isDefault: false },
         })
       }
